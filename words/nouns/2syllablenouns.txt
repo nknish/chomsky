@@ -9612,6 +9612,7 @@ ickers
 icon
 icons
 ictus
+idea
 idlesse
 idling
 idol

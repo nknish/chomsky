@@ -2641,6 +2641,7 @@ sledge
 sleds
 sleek
 sleeks
+sleep
 sleeps
 sleet
 sleets
