@@ -5,7 +5,7 @@ from random import choice
 
 colors = ['\033[94m', '\033[95m', '\033[91m', '\033[1m', '\033[92m']
 end_color = '\033[0m'
-share_path = '/usr/local/share/words'
+share_path = '/usr/local/share/chomsky/words'
 
 
 def usage_error():
