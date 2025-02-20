@@ -1,5 +1,5 @@
 # chomsky
-##colorless green ideas sleep furiously
+## colorless green ideas sleep furiously
 
 
 This is a work in progress. For now, if you want to try it out (for mac):
