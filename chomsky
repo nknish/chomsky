@@ -1,0 +1,95 @@
+#!/opt/anaconda3/bin/python
+
+import sys
+from random import choice
+
+colors = ['\033[94m', '\033[95m', '\033[91m', '\033[1m', '\033[92m']
+end_color = '\033[0m'
+share_path = '/usr/local/share/chomsky'
+
+
+def usage_error():
+	usage = 'usage: chomsky [--color] [quantity]'
+	print(usage)
+	exit()
+
+
+def process_word_files():
+	parts = ["noun", "verb", "adjective", "adverb"]
+	words = {"noun": [], "verb": [], "adjective": [], "adverb": []}
+	for part in parts:
+		for i in (1, 2, 3, 4):
+			f = open(f"{share_path}/{part}s/{i}syllable{part}s.txt", "r")
+			current_words = f.read().strip().split("\n")
+			for word in current_words:
+				words[part].append(word)
+	return words
+
+
+def get_chomsky_sentence(words, is_color):
+	s = ""
+	parts = ["adjective", "adjective", "noun", "verb", "adverb"]
+	for i in range(len(parts)):
+		part = parts[i]
+		word = choice(words[part])
+		if is_color:
+			s += colors[i]
+		if part == "verb":
+			while word[-3:] == "ing" or word[-2:] == "ed" or word[-1] == "s":
+				word = choice(words[part])
+		elif part == 'noun':
+			while word[-1] == 's':
+				word = choice(words[part])
+			if word[-1] == 'y':
+				word = word[:len(word)-1] + 'ie'
+			word += "s"
+		elif part == 'adverb':
+			while word[-2:] != "ly":
+				word = choice(words[part])
+		s += word + " "
+		if is_color:
+			s += end_color
+	return s
+
+
+def main():
+	try:
+		words = process_word_files()
+	except:
+		print("can't find the files.")
+		exit()
+
+	is_color = False
+	num = 1
+
+	args = sys.argv
+
+	if len(args) == 2:
+		if args[1] == '--color' or args[1] == '-c':
+			is_color = True
+		elif args[1].isdigit():
+			num = int(args[1])
+		else:
+			usage_error()
+	elif len(args) == 3:
+		if args[1] == '--color' or args[1] == '-c':
+			is_color = True
+		else:
+			usage_error()
+		if args[2].isdigit():
+			num = int(args[2])
+		else:
+			usage_error()
+	elif len(args) > 3:
+		usage_error()			
+
+	if num >= 100000:
+		if input(f'are you sure you want so many? ({num})\nenter [y] to confirm: ') != 'y':
+			exit()
+
+	for i in range(num):
+		print(get_chomsky_sentence(words, is_color))
+
+
+if __name__ == '__main__':
+	main()

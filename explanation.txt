@@ -1,0 +1,12 @@
+chomsky! a command line tool to display a chomsky sentence (like "colorless green ideas sleep furiously").
+
+run using:
+ - chomsky
+ - -c or --color if you want text in color
+ - an integer (to get multiple sentences!)
+
+find chomsky in usr/local:
+ - python executable is in usr/local/bin
+ - text files (to get all the words) are in usr/local/share/chomsky
+
+primarily thrown together feb 17-18, 2025
