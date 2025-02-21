@@ -20,7 +20,10 @@ git clone https://github.com/nknish/chomsky; make -C chomsky install
 if you're on windows, good luck!
 
 ## usage
-- try running `chomsky` or `chomsky 3` (or even `chomsky --color`) and see how it goes
+- `chomsky` to print a sentence to stdout
+- `chomsky --color` or `chomsky -c` to make it pretty
+- `chomsky 3` (or any positive integer) to get that many sentences
+- `chomsky --help` (or any invalid args) to see the usage syntax
 - i might add some more features later but who knows
 
 ## tech stack
