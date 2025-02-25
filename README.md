@@ -9,10 +9,16 @@ for those times when you want to say nothing, but don't know how to say it
 ## installation
 (you've gotta have python installed)
 
-if you want to try it out (for mac), run
+if you want to try it out (for mac), and you have homebrew installed run:
 
 ```
 git clone https://github.com/nknish/chomsky; make -C chomsky install
+```
+
+this will probably cause some permission issues if you don't have homebrew. in that case, just run with `sudo`:
+
+```
+git clone https://github.com/nknish/chomsky; sudo make -C chomsky install
 ```
 
 ...and then the command `chomsky` will be in your system path (in `usr/local/bin`). 
