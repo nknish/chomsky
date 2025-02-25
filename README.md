@@ -7,23 +7,23 @@ for those times when you want to say nothing, but don't know how to say it
 - that's about it 
 
 ## installation
-(you've gotta have python installed)
 
-if you want to try it out (for mac), and you have homebrew installed run:
+### dependencies
+- only supports **mac** os.
+- you've gotta already have **python** installed
+- downloading this without using `git clone` will be a headache but is certainly possible
+
+### instructions
+
+- just run
 
 ```
 git clone https://github.com/nknish/chomsky; make -C chomsky install
 ```
 
-this will probably cause some permission issues if you don't have homebrew. in that case, just run with `sudo`:
+- if you have permission issues, you'll be prompted to enter your password.
 
-```
-git clone https://github.com/nknish/chomsky; sudo make -C chomsky install
-```
-
-...and then the command `chomsky` will be in your system path (in `usr/local/bin`). 
-
-if you're on windows, good luck!
+- and then the command `chomsky` will be in your system path (in `usr/local/bin`). 
 
 ## usage
 - `chomsky` to print a sentence to stdout
