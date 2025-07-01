@@ -70,6 +70,16 @@ if [ -f "$TARGET_DIR/$EXE" ] || [ "$R_EXISTS" = true ]; then
     read -p "keep going anyways? (y/n): " confirm
     if [[ ! "$confirm" =~ ^[Yy]$ ]]; then
         echo "okay then, i guess this is it..."
+
+        # delete unnecessary files
+        if [ "$(basename "$(pwd)")" = "chomsky" ]; then
+            echo "6. cleaning up installation files in $(pwd)"
+            rm -rf "$(pwd)"
+        else
+            echo "error: could not locate and delete installer directory"
+        fi
+        
+        cd "$ORIGINAL_DIR"
         exit 1
     fi
 fi
