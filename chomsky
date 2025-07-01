@@ -6,11 +6,28 @@ from random import choice
 colors = ['\033[94m', '\033[95m', '\033[91m', '\033[1m', '\033[92m']
 end_color = '\033[0m'
 share_path = '/usr/local/share/chomsky/words'
+version = '2.0.0'
+
+
+class ChomskyArgs:
+	def __init__(self):
+		self.color = False
+		self.quantity = 1
 
 
 def usage_error():
+	print('error! invalid argument(s)')
+	get_help()
+
+
+def get_help():
 	usage = 'usage: chomsky [--color] [quantity]'
 	print(usage)
+	exit()
+
+
+def get_version():
+	print(f'chomsky version {version}')
 	exit()
 
 
@@ -25,6 +42,58 @@ def process_word_files():
 				words[part].append(word)
 	return words
 
+
+def parse_args(args):
+	args.pop(0)
+
+	ret = ChomskyArgs()
+
+	# no args
+	if not args:
+		return ret
+	
+	# single special arg
+	if len(args) == 1:
+		arg = args[0]
+		if arg[:2] == '--':
+			if arg == '--help' or arg == '--usage':
+				get_help()
+			elif arg == '--version':
+				get_version()
+		elif arg[0] == '-' and len(arg) == 2:
+			if arg == '-h' or arg == '-H':
+				get_help()
+			elif arg == '-V':
+				get_version()
+
+	# optional integer arg
+	try:
+		ret.quantity = int(args[-1])
+		if ret.quantity < 0:
+			usage_error()
+		args.pop()
+	except ValueError:
+		ret.quantity = 1
+
+	# ordinary optional flags
+	while args:
+		arg = args.pop()
+		if arg[:2] == '--':
+			if arg == '--color':
+				ret.color = True
+			else:
+				usage_error()
+		elif arg[0] == '-' and len(arg) > 1:
+			for flag in arg[1:]:
+				if flag == 'c':
+					ret.color = True
+				else:
+					usage_error()
+		else:
+			usage_error()
+	
+	return ret
+	
 
 def get_chomsky_sentence(words, is_color):
 	s = ""
@@ -53,42 +122,20 @@ def get_chomsky_sentence(words, is_color):
 
 
 def main():
+	args = parse_args(sys.argv)	
+	
 	try:
 		words = process_word_files()
 	except:
 		print("can't find the files.")
 		exit()
 
-	is_color = False
-	num = 1
-
-	args = sys.argv
-
-	if len(args) == 2:
-		if args[1] == '--color' or args[1] == '-c':
-			is_color = True
-		elif args[1].isdigit():
-			num = int(args[1])
-		else:
-			usage_error()
-	elif len(args) == 3:
-		if args[1] == '--color' or args[1] == '-c':
-			is_color = True
-		else:
-			usage_error()
-		if args[2].isdigit():
-			num = int(args[2])
-		else:
-			usage_error()
-	elif len(args) > 3:
-		usage_error()			
-
-	if num >= 100000:
-		if input(f'are you sure you want so many? ({num})\nenter [y] to confirm: ') != 'y':
+	if args.quantity >= 100000:
+		if input(f'are you sure you want so many? ({args.quantity})\nenter [y] to confirm: ') != 'y':
 			exit()
 
-	for i in range(num):
-		print(get_chomsky_sentence(words, is_color))
+	for i in range(args.quantity):
+		print(get_chomsky_sentence(words, args.color))
 
 
 if __name__ == '__main__':
