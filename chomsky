@@ -6,7 +6,7 @@ from random import choice
 colors = ['\033[94m', '\033[95m', '\033[91m', '\033[1m', '\033[92m']
 end_color = '\033[0m'
 share_path = '/usr/local/share/chomsky/words'
-version = '2.0.1'
+version = '2.0.2'
 
 
 class ChomskyArgs:
@@ -24,6 +24,11 @@ def usage_error():
 def get_help():
 	usage = 'usage: chomsky [--color] [--yes] [quantity]'
 	print(usage)
+	exit()
+
+
+def give_verbose():
+	print('chomsky is ALWAYS verbose')
 	exit()
 
 
@@ -59,11 +64,15 @@ def parse_args(args):
 		if arg[:2] == '--':
 			if arg == '--help' or arg == '--usage':
 				get_help()
+			elif arg == '--verbose':
+				give_verbose()
 			elif arg == '--version':
 				get_version()
 		elif arg[0] == '-' and len(arg) == 2:
 			if arg == '-h' or arg == '-H':
 				get_help()
+			elif arg == '-v':
+				give_verbose()
 			elif arg == '-V':
 				get_version()
 
