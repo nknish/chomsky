@@ -6,12 +6,13 @@ from random import choice
 colors = ['\033[94m', '\033[95m', '\033[91m', '\033[1m', '\033[92m']
 end_color = '\033[0m'
 share_path = '/usr/local/share/chomsky/words'
-version = '2.0.0'
+version = '2.0.1'
 
 
 class ChomskyArgs:
 	def __init__(self):
 		self.color = False
+		self.yes = False
 		self.quantity = 1
 
 
@@ -21,7 +22,7 @@ def usage_error():
 
 
 def get_help():
-	usage = 'usage: chomsky [--color] [quantity]'
+	usage = 'usage: chomsky [--color] [--yes] [quantity]'
 	print(usage)
 	exit()
 
@@ -81,12 +82,16 @@ def parse_args(args):
 		if arg[:2] == '--':
 			if arg == '--color':
 				ret.color = True
+			elif arg == '--yes':
+				ret.yes = True
 			else:
 				usage_error()
 		elif arg[0] == '-' and len(arg) > 1:
 			for flag in arg[1:]:
 				if flag == 'c':
 					ret.color = True
+				elif flag == 'y':
+					ret.yes = True
 				else:
 					usage_error()
 		else:
@@ -123,14 +128,14 @@ def get_chomsky_sentence(words, is_color):
 
 def main():
 	args = parse_args(sys.argv)	
-	
+
 	try:
 		words = process_word_files()
 	except:
 		print("can't find the files.")
 		exit()
 
-	if args.quantity >= 100000:
+	if args.quantity >= 100000 and not args.yes:
 		if input(f'are you sure you want so many? ({args.quantity})\nenter [y] to confirm: ') != 'y':
 			exit()
 
