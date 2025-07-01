@@ -4,7 +4,7 @@ for those times when you want to say nothing, but don't know how to say it
 
 ## description
 
-- a python command line tool that generates a syntactically valid but semantically nonsensical sentence.
+- a python command line tool that generates a syntactically valid but semantically nonsensical sentence
 - sentences will loosely follow the phrase structure of ["colorless green ideas sleep furiously"](https://en.wikipedia.org/wiki/Colorless_green_ideas_sleep_furiously)
 - that's about it
 
@@ -18,22 +18,24 @@ for those times when you want to say nothing, but don't know how to say it
 
 ### instructions
 
-- just run
+- simply run the following command:
 
 ```
 git clone https://github.com/nknish/chomsky && sh chomsky/install.sh
 ```
 
-- if you have permission issues, you'll be prompted to enter your password.
-
-- and then the command `chomsky` will be in your system path (in `usr/local/bin`).
+- if you have permission issues, you'll be prompted to enter your password
+- if you've previously installed chomsky (or somehow have file/directory name conflicts), you'll be prompted to overwrite existing files
+- and then the command `chomsky` will be in your system path (in `usr/local/bin`)
 
 ## usage
 
 - `chomsky` to print a sentence to stdout
-- `chomsky --color` or `chomsky -c` to make it pretty
 - `chomsky 3` (or any positive integer) to get that many sentences
-- `chomsky --help` (or any invalid args) to see the usage syntax
+- `chomsky --color` or `chomsky -c` to make it pretty
+- `chomsky --help` or `chomsky -h` to see the usage syntax
+- `chomsky --version` or `chomsky -V` to see the version number
+- `chomsky --verbose` or `chomsky -v` to get verbose output (at your own risk)
 - i might add some more features later but who knows
 
 ## tech stack
